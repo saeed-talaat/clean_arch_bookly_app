@@ -2,6 +2,7 @@ import 'package:clean_artc_bookly_app/constants.dart';
 import 'package:clean_artc_bookly_app/core/services/get_it.dart';
 import 'package:clean_artc_bookly_app/core/utils/app_colors.dart';
 import 'package:clean_artc_bookly_app/core/utils/app_router.dart';
+import 'package:clean_artc_bookly_app/core/utils/simple_bloc_observer.dart';
 import 'package:clean_artc_bookly_app/features/home/domain/entities/book_entity.dart';
 import 'package:clean_artc_bookly_app/features/home/domain/use_cases/fetch_featured_books_use_case.dart';
 import 'package:clean_artc_bookly_app/features/home/domain/use_cases/fetch_newset_books_use_case.dart';
@@ -18,6 +19,7 @@ void main() async {
   await Hive.openBox<BookEntity>(kFeaturedBox);
   await Hive.openBox<BookEntity>(kNewestBox);
   getItInit();
+  Bloc.observer = SimpleBlocObserver();
   runApp(const BooklyAppCleanArch());
 }
 
