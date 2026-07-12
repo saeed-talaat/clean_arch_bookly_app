@@ -5,14 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'newset_books_state.dart';
 
 class NewsetBooksCubit extends Cubit<NewsetBooksState> {
-  NewsetBooksCubit({required this.fetchNewsetBooksUseCase})
+  NewsetBooksCubit({required this._fetchNewsetBooksUseCase})
     : super(NewsetBooksInitial());
 
-  final FetchNewsetBooksUseCase fetchNewsetBooksUseCase;
+  final FetchNewsetBooksUseCase _fetchNewsetBooksUseCase;
 
   Future<void> fetchNewsetBooks() async {
     emit(NewsetBooksLoading());
-    final result = await fetchNewsetBooksUseCase.call();
+    final result = await _fetchNewsetBooksUseCase.call();
     result.fold(
       (failure) => emit(NewsetBooksFailure(errorMessage: failure.errorMessage)),
       (books) => emit(NewsetBooksSuccess(books: books)),

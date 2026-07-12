@@ -1,19 +1,20 @@
 import 'package:clean_artc_bookly_app/constants.dart';
 import 'package:clean_artc_bookly_app/core/utils/app_styles.dart';
+import 'package:clean_artc_bookly_app/features/home/domain/entities/book_entity.dart';
 import 'package:clean_artc_bookly_app/features/home/presentation/views/widgets/book_image.dart';
 import 'package:clean_artc_bookly_app/features/home/presentation/views/widgets/book_rating.dart';
 import 'package:flutter/material.dart';
 
-class BestSellerItem extends StatelessWidget {
-  const BestSellerItem({super.key});
-
+class NewestItem extends StatelessWidget {
+  const NewestItem({super.key, required this.bookEntity});
+  final BookEntity bookEntity;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 125,
       child: Row(
         children: [
-          BookImage(image: ''),
+          BookImage(image: bookEntity.imageUrl ?? ''),
           SizedBox(width: 30),
           Expanded(
             child: Column(
@@ -22,7 +23,7 @@ class BestSellerItem extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.sizeOf(context).width * 0.5,
                   child: Text(
-                    'Harry Potter and the Goblet of Fire',
+                    bookEntity.title,
                     style: AppStyles.textStyle20.copyWith(
                       fontFamily: kAppFontFamily,
                     ),
@@ -31,12 +32,12 @@ class BestSellerItem extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 3),
-                Text('J.K. Rowling', style: AppStyles.textStyle14, maxLines: 1),
+                Text(bookEntity.authorName ?? 'noName', style: AppStyles.textStyle14, maxLines: 1),
                 SizedBox(height: 3),
                 Row(
                   children: [
                     Text(
-                      r'19.19$',
+                      bookEntity.price.toString() ,
                       style: AppStyles.textStyle20.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

@@ -1,7 +1,7 @@
 import 'package:clean_artc_bookly_app/core/utils/app_styles.dart';
-import 'package:clean_artc_bookly_app/features/home/presentation/views/widgets/best_seller_list_view.dart';
 import 'package:clean_artc_bookly_app/features/home/presentation/views/widgets/custom_home_app_bar.dart';
 import 'package:clean_artc_bookly_app/features/home/presentation/views/widgets/featured_list_view_bloc_builder.dart';
+import 'package:clean_artc_bookly_app/features/home/presentation/views/widgets/newset_list_view_bloc_builder.dart';
 import 'package:flutter/material.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -32,7 +32,7 @@ class HomeViewBody extends StatelessWidget {
               ],
             ),
           ),
-          BestSellerListView(),
+          NewsetListViewBlocBuilder()
         ],
       ),
     );

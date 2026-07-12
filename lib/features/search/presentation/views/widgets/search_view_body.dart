@@ -1,6 +1,6 @@
 import 'package:clean_artc_bookly_app/core/utils/app_styles.dart';
 import 'package:clean_artc_bookly_app/features/search/presentation/views/widgets/custom_search_text_field.dart';
-import 'package:clean_artc_bookly_app/features/search/presentation/views/widgets/search_result_text_field.dart';
+import 'package:clean_artc_bookly_app/features/search/presentation/views/widgets/search_result_list_view_bloc_builder.dart';
 import 'package:flutter/material.dart';
 
 class SearchViewBody extends StatelessWidget {
@@ -17,7 +17,7 @@ class SearchViewBody extends StatelessWidget {
           SizedBox(height: 16),
           Text('Search Result', style: AppStyles.textStyle18),
           SizedBox(height: 16),
-          Expanded(child: SearchResultListView()),
+          Expanded(child: SearchResultListViewBlocBuilder()),
         ],
       ),
     );

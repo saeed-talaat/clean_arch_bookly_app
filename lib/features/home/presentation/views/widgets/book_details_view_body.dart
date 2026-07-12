@@ -1,7 +1,7 @@
 import 'package:clean_artc_bookly_app/core/utils/app_styles.dart';
 import 'package:clean_artc_bookly_app/features/home/presentation/views/widgets/book_details_section.dart';
 import 'package:clean_artc_bookly_app/features/home/presentation/views/widgets/custom_book_details_app_bar.dart';
-import 'package:clean_artc_bookly_app/features/home/presentation/views/widgets/simllar_books_list_view.dart';
+import 'package:clean_artc_bookly_app/features/home/presentation/views/widgets/simllar_books_list_view_bloc_builder.dart';
 import 'package:flutter/material.dart';
 
 class BookDetailsViewBody extends StatelessWidget {
@@ -30,7 +30,7 @@ class BookDetailsViewBody extends StatelessWidget {
                   ),
                 ),
                 Spacer(flex: 1),
-                SimllarBooksListView(),
+                SimllarBooksListViewBlocBuilder(),
                 Spacer(flex: 1),
               ],
             ),
