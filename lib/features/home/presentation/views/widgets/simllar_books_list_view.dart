@@ -15,7 +15,7 @@ class SimllarBooksListView extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return Padding(
             padding: const EdgeInsets.only(right: 8),
-            child: BookImage(),
+            child: BookImage(image: '',),
           );
         },
       ),

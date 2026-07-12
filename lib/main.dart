@@ -33,7 +33,7 @@ class BooklyAppCleanArch extends StatelessWidget {
         BlocProvider(
           create: (context) => FeaturedBooksCubit(
             featuredBooksUseCase: geIt<FetchFeaturedBooksUseCase>(),
-          ),
+          )..fetchFeaturedBooks(),
         ),
 
         BlocProvider(

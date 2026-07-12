@@ -13,7 +13,7 @@ class BestSellerItem extends StatelessWidget {
       height: 125,
       child: Row(
         children: [
-          BookImage(),
+          BookImage(image: ''),
           SizedBox(width: 30),
           Expanded(
             child: Column(

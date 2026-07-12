@@ -5,14 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'featured_books_state.dart';
 
 class FeaturedBooksCubit extends Cubit<FeaturedBooksState> {
-  FeaturedBooksCubit({required this.featuredBooksUseCase})
+  FeaturedBooksCubit({required this._featuredBooksUseCase})
     : super(FeaturedBooksInitial());
 
-  final FetchFeaturedBooksUseCase featuredBooksUseCase;
+  final FetchFeaturedBooksUseCase _featuredBooksUseCase;
 
   Future<void> fetchFeaturedBooks() async {
     emit(FeaturedBooksLoading());
-    final result = await featuredBooksUseCase.call();
+    final result = await _featuredBooksUseCase.call();
     result.fold(
       (failure) =>
           emit(FeaturedBooksFailure(errorMessage: failure.errorMessage)),
