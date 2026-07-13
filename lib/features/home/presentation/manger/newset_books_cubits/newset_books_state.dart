@@ -14,4 +14,9 @@ final class NewsetBooksFailure extends NewsetBooksState {
 
   NewsetBooksFailure({required this.errorMessage});
 }
+final class NewsetBooksPaginationLoading extends NewsetBooksState {}
+final class NewsetBooksPaginationFailure extends NewsetBooksState {
+  final String errorMessage;
 
+  NewsetBooksPaginationFailure({required this.errorMessage});
+}
