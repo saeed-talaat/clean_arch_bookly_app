@@ -5,7 +5,7 @@ import 'package:clean_artc_bookly_app/features/home/data/models/book_model/book_
 import 'package:clean_artc_bookly_app/features/home/domain/entities/book_entity.dart';
 
 abstract class HomeRemoteDataSources {
-  Future<List<BookEntity>> fetchFeaturedBooks();
+  Future<List<BookEntity>> fetchFeaturedBooks({int pageNumber = 0});
   Future<List<BookEntity>> fetchNewsetBooks();
 }
 
@@ -14,9 +14,9 @@ class HomeRemoteDataSourcesImple implements HomeRemoteDataSources {
 
   HomeRemoteDataSourcesImple({required this._apiService});
   @override
-  Future<List<BookEntity>> fetchFeaturedBooks() async {
+  Future<List<BookEntity>> fetchFeaturedBooks({int pageNumber = 0}) async {
     var data = await _apiService.get(
-      endpoint: 'volumes?q=programming&Filtering=free-ebooks',
+      endpoint: 'volumes?q=programming&filter=free-ebooks&startIndex=${pageNumber * 10}',
     );
     List<BookEntity> books = _getBooksList(data);
     saveBoxData(books, kFeaturedBox);
@@ -26,7 +26,7 @@ class HomeRemoteDataSourcesImple implements HomeRemoteDataSources {
   @override
   Future<List<BookEntity>> fetchNewsetBooks() async {
     var data = await _apiService.get(
-      endpoint: 'volumes?q=programming&Filtering=free-ebooks&Sorting=newest',
+      endpoint: 'volumes?q=programming&filter=free-ebooks&orderBy=newest&startIndex=10'
     );
     List<BookEntity> books = _getBooksList(data);
     saveBoxData(books, kNewestBox);
@@ -39,10 +39,13 @@ class HomeRemoteDataSourcesImple implements HomeRemoteDataSources {
 
 
   List<BookEntity> _getBooksList(Map<String, dynamic> data) {
-    List<BookEntity> books = [];
-    for (var item in data['items']) {
-      books.add(BookModel.fromJson(item).toEntity());
+    List<BookEntity> books = [];    
+    if (data['items'] != null) {
+      for (var item in data['items']) {
+        books.add(BookModel.fromJson(item).toEntity());
+      }
     }
+    
     return books;
   }
 }

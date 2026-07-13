@@ -19,19 +19,40 @@ class HomeRepoImple implements HomeRepo {
   });
 
   @override
-  Future<Either<Failure, List<BookEntity>>> fetchFeaturedBooks() async {
+  Future<Either<Failure, List<BookEntity>>> fetchFeaturedBooks({
+    int pageNumber = 0,
+  }) async {
     try {
-      List<BookEntity> books = homeLocalDataSources.fetchFeaturedBooks();
-      if (books.isEmpty) {
-        books = await homeRemoteDataSources.fetchFeaturedBooks();
+     
+      List<BookEntity> books = homeLocalDataSources.fetchFeaturedBooks(
+        pageNumber: pageNumber,
+      );
+
+      if (books.isNotEmpty) {
+        return right(books);
       }
-      return right(books);
+
+      int maxRetries = 3;
+      for (int attempt = 0; attempt < maxRetries; attempt++) {
+        try {
+          books = await homeRemoteDataSources.fetchFeaturedBooks(
+            pageNumber: pageNumber,
+          );
+          return right(books); 
+        } catch (remoteError) {
+          if (attempt == maxRetries - 1) {
+            rethrow;
+          }
+          await Future.delayed(Duration(seconds: 15));
+        }
+      }
+      return left(ServerFailure(errorMessage: 'Unexpected error occurred'));
     } catch (e) {
       if (e is DioException) {
-        log('Exception in  HomeRepoImple.fetchFeaturedBooks : ${e.toString()}');
+        log('Exception in HomeRepoImple.fetchFeaturedBooks : ${e.toString()}');
         return left(ServerFailure.fromDioError(e));
       } else {
-        log('Exception in  HomeRepoImple.fetchFeaturedBooks : ${e.toString()}');
+        log('Exception in HomeRepoImple.fetchFeaturedBooks : ${e.toString()}');
         return left(
           ServerFailure(errorMessage: 'Failed to fetch books try again later!'),
         );

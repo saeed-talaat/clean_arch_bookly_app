@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 class ApiService {
   final Dio _dio;
   final _baseUrl = 'https://www.googleapis.com/books/v1/';
-  final _apiKey = 'AIzaSyDmc0dB_KkcQxl3NymW9QQhUMO8bJO6B1U';
+  final _apiKey = 'AIzaSyDMfQ9kYrvYk9QXMNkBRkexFDaPadLWZdE';
 
 
   ApiService({required this._dio});
